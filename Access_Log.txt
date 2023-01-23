@@ -1,0 +1,11 @@
+Mon Jan 23 02:13:08 2023
+Name: Ben FieldID_number: 10781695room code: KS101access granted: 1 emergency_mode: 0Mon Jan 23 11:19:56 2023
+Name: Ben Field ID_number: 10781695 room code: KS102 access granted: 0  emergency_mode: 0
+Mon Jan 23 11:20:09 2023
+Name: Tom Bergier ID_number: 12 room code: KS101 access granted: 1  emergency_mode: 0
+Mon Jan 23 11:30:23 2023
+Name: Ben Field ID_number: 10781695 room code: KS102 access granted: 0  emergency_mode: 0
+Mon Jan 23 11:34:45 2023
+Name: Ben Field ID_number: 10781695 room code: KS102 access granted: 0  emergency_mode: 0
+Mon Jan 23 11:51:51 2023
+Name: Tom Bergier ID_number: 12 room code: KS102 access granted: 1  emergency_mode: 0
