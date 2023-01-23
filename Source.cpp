@@ -6,11 +6,13 @@
 
 using namespace std;
 
-class Room
+class Room			// Room class
 {
+	//attributes
 	string room_code;
 	string room_type;
 public:
+	//methods
 	void boot_room_data(string boot_room_code, string boot_room_type);
 	void get_room_data();
 	void put_room_data();
@@ -18,13 +20,13 @@ public:
 	string call_room_type();
 };
 
-void Room::boot_room_data(string boot_room_code, string boot_room_type)
+void Room::boot_room_data(string boot_room_code, string boot_room_type)			// Boot function
 {
 	room_code = boot_room_code;
 	room_type = boot_room_type;
 }
 
-void Room::get_room_data()
+void Room::get_room_data()				//Add new rooms
 {
 	cout << "Enter room code: ";
 	cin >> room_code;
@@ -32,31 +34,33 @@ void Room::get_room_data()
 	cin >> room_type;
 }
 
-void Room::put_room_data()
+void Room::put_room_data()				//View Rooms
 {
 	cout << room_code << " ";
 	cout << room_type << " ";
 	cout << endl;
 }
 
-string Room::call_room_code()
+string Room::call_room_code()			//Access room code
 {
 	return room_code;
 }
 
-string Room::call_room_type()
+string Room::call_room_type()				// access room type
 {
 	return room_type;
 }
 
-class ID_Card
+class ID_Card							//ID_Card class
 {
+	//attributes
 	string f_name;
 	string l_name;
 	int ID;
 	int age;
 	string role;
 public:
+	//methods
 	void boot_holder_data(string boot_fname, string boot_lname, string boot_ID, string boot_age, string boot_role);
 	void get_ID_data();
 	void put_ID_data();
@@ -67,7 +71,7 @@ public:
 	int call_holder_age();
 };
 
-void ID_Card::boot_holder_data(string boot_fname, string boot_lname, string boot_ID, string boot_age, string boot_role)
+void ID_Card::boot_holder_data(string boot_fname, string boot_lname, string boot_ID, string boot_age, string boot_role)				// boot function
 {
 	f_name = boot_fname;
 	l_name = boot_lname;
@@ -76,7 +80,7 @@ void ID_Card::boot_holder_data(string boot_fname, string boot_lname, string boot
 	role = boot_role;
 }
 
-void ID_Card::get_ID_data()
+void ID_Card::get_ID_data()									// add new holder
 {
 	cout << "Enter First Name: ";
 	cin >> f_name;
@@ -90,7 +94,7 @@ void ID_Card::get_ID_data()
 	cin >> role;
 }
 
-void ID_Card::put_ID_data()
+void ID_Card::put_ID_data()								// view holders
 {
 	cout << f_name << " ";
 	cout << l_name << " ";
@@ -100,44 +104,46 @@ void ID_Card::put_ID_data()
 	cout << endl;
 }
 
-string ID_Card::call_holder_fname()
+string ID_Card::call_holder_fname()						// access first name
 {
 	return f_name;
 }
 
-string ID_Card::call_holder_lname()
+string ID_Card::call_holder_lname()						// access last name
 {
 	return l_name;
 }
 
-int ID_Card::call_holder_ID()
+int ID_Card::call_holder_ID()							// access ID
 {
 	return ID;
 }
 
-string ID_Card::call_holder_role()
+string ID_Card::call_holder_role()						// access role
 {
 	return role;
 }
 
-int ID_Card::call_holder_age()
+int ID_Card::call_holder_age()							// access age
 {
 	return age;
 }
 
-class Access
+class Access					// access class
 {
 public:
+	// method for requesting access and writing to file
 	void attempt_access(string first_name, string last_name, int ID_number, string room, bool access_granted, bool room_state);
 };
 
 void Access::attempt_access(string first_name, string last_name, int ID_number, string room, bool access_granted, bool room_state)
 {
+	// Getting time ------------------------------
 	time_t result = time(NULL);
 
 	char str[26];
 	ctime_s(str, sizeof str, &result);
-
+	//---------------------------------------------
 	ofstream MyFile;
 	
 	MyFile.open("Access_Log.txt", ios::app);
@@ -148,9 +154,10 @@ void Access::attempt_access(string first_name, string last_name, int ID_number, 
 }
 
 
-class Boot
+class Boot				//boot class
 {
 public:
+	//attributes
 	string boot_room_code;
 	string boot_room_type;
 	string boot_emergency_mode;
@@ -160,11 +167,12 @@ public:
 	string boot_age;
 	string boot_role;
 	string delimiter = " ";
+	// methods
 	void splitStringrooms(string str, string delimiter = " ");
 	void splitStringholders(string str, string delimiter = " ");
 };
 
-void Boot::splitStringrooms(string str, string delimiter)
+void Boot::splitStringrooms(string str, string delimiter)						// boot room list
 {
 	int i = 0;
 	int start = 0;
@@ -186,7 +194,7 @@ void Boot::splitStringrooms(string str, string delimiter)
 	//cout << boot_room_code << "\n" << boot_room_type << "\n" << boot_emergency_mode;
 }
 
-void Boot::splitStringholders(string str, string delimiter)
+void Boot::splitStringholders(string str, string delimiter)							// boot holder list
 {
 	int i = 0;
 	int start = 0;
@@ -217,6 +225,7 @@ void Boot::splitStringholders(string str, string delimiter)
 
 int main()
 {
+	// Main atributes + array of objects
 	Room rooms[50];
 	ID_Card holders[50];
 	Access access;
@@ -232,6 +241,8 @@ int main()
 	bool access_granted = false;
 	string boot_info;
 
+	// Boot rooms and holders files
+
 	ifstream MyReadFile;
 
 	MyReadFile.open("Room_List.txt");
@@ -240,7 +251,7 @@ int main()
 	{
 		boot.splitStringrooms(boot_info, " ");
 
-		rooms[current_number_of_rooms].boot_room_data(boot.boot_room_code, boot.boot_room_type);
+		rooms[current_number_of_rooms].boot_room_data(boot.boot_room_code, boot.boot_room_type);		//add to object array
 		if (boot.boot_emergency_mode == "0")
 			emergency = false;
 		else if (boot.boot_emergency_mode == "1")
@@ -263,7 +274,7 @@ int main()
 	{
 		boot.splitStringholders(boot_info, " ");
 
-		holders[current_number_of_holders].boot_holder_data(boot.boot_fname, boot.boot_lname, boot.boot_ID, boot.boot_age, boot.boot_role);
+		holders[current_number_of_holders].boot_holder_data(boot.boot_fname, boot.boot_lname, boot.boot_ID, boot.boot_age, boot.boot_role);		//add to object array
 
 		current_number_of_holders++;
 
@@ -276,6 +287,8 @@ int main()
 
 	//_getch();			Test
 
+
+	// menu system
 
 	while (run_program == true)
 	{
@@ -379,7 +392,7 @@ int main()
 					break;
 				}
 
-			case 6:
+			case 6:						// end program and write to file (save changes)
 				ofstream MyFile;
 
 				MyFile.open("Room_List.txt");
@@ -402,23 +415,29 @@ int main()
 
 			break;
 
+			// Holders way of attempting access to a room
+
 		case 2:
 			cout << "Card Holder: \n\n";
 
 			cout << "What is your holder ID?";
-			cin >> holders_ID;
+			cin >> holders_ID;						// ID check
 
 			for (i = 0; i < current_number_of_holders; i++)
 			{
 				if (holders_ID == holders[i].call_holder_ID())
 				{
-					cout << "What Room do You Want to Enter?\n\n";
+					cout << "What Room do You Want to Enter?\n\n";			// Desired room to access
 					cin >> desired_room_code;
 
 					for (j = 0; j < current_number_of_rooms; j++)
 					{
-						if (desired_room_code == rooms[j].call_room_code())
+						if (desired_room_code == rooms[j].call_room_code())		// chekcing if rooms exists
 						{
+
+							// Checks what the rooms type is and the holder type to see if they have access to the room or not
+
+
 							if (rooms[j].call_room_type() == "Lecture")
 							{
 								if (holders[i].call_holder_role() == "Staff")
@@ -944,7 +963,7 @@ int main()
 
 			break;
 
-		case 3:
+		case 3:						// end program and write to file (save changes)
 			ofstream MyFile;
 
 			MyFile.open("Room_List.txt");
@@ -964,6 +983,8 @@ int main()
 			run_program = false;
 			break;
 		}
+
+		// end program and write to file (save changes)
 
 		ofstream MyFile;
 
